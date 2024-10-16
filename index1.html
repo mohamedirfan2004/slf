@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students Laboratory Foyer</title>
+    <link rel="icon" href="fxec logo.png" type="images/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="login.css">
+
+    <style>
+        form {
+            width: '-webkit-fill-available';
+            margin-top: 92px;
+        }
+
+        /* Styling for the loader */
+        #loader {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
+
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <button id="demo"><a href="demo.mp4" target="_blank">
+            <i class="ri-video-fill"></i> DEMO VIDEO</a></button>
+        <div id="loader">
+            <div class="loader"></div>
+        </div>
+        <div class="design">
+            <img class="logo" src="fx.png" alt="logo">
+
+        </div>
+        <form id="submit-form" action="">
+            <div id="login-section" class="login">
+                <img class="slf" src="slf logo.png" alt="logo">
+                <h3 class="title">Students Laboratory Foyer</h3>
+                <div class="text-input">
+                    <i class="ri-user-fill"></i>
+                    <input type="text" name="name" placeholder="Enter your Name" required autocomplete="off">
+                </div>
+                <div class="text-input">
+                    <i class="ri-pencil-fill"></i>
+                    <input type="number" name="Register Number" required="true" placeholder="Register Number">
+                </div>
+                <div class="text-input">
+                    <i class="ri-computer-fill"></i>
+                    <input type="text" id="systemNumberInput" name="system number" placeholder="System Number or Laptop" autocomplete="off" readonly>
+                </div>
+                <script>
+                    // Retrieve stored system number from localStorage
+                    var storedSystemNumber = localStorage.getItem('ls_systemNumber');
+
+                    // Check if storedSystemNumber exists
+                    if (storedSystemNumber) {
+                        // Set the value of the input field
+                        document.getElementById("systemNumberInput").value = storedSystemNumber;
+                    } else {
+                        // If no stored system number, display an alert or handle as necessary
+                        alert("System number not found!");
+                    }
+
+                    // Disable editing of the input field
+                    document.getElementById("systemNumberInput").readOnly = true;
+
+                </script>
+                <div class="text-input">
+                    <i class="ri-table-fill"></i>
+                    <select id="select-design" name="Lab">
+                        <option>Choose Lab</option>
+                        <option value="Research Lab">Research Lab</option>
+                        <option value="OS Lab">OS Lab</option>
+                        <option value="Network Lab">Network Lab</option>
+                    </select>
+                </div>
+                <button type="button" class="login-btn" onclick="login()">LOGIN</button>
+            </div>
+
+
+            <div id="logout-section" class="logout" style="display: none;">
+                <!-- <button onclick='setTimeout(Internet,3000)' class="Network"> 
+                     <span><i class="ri-wifi-fill"></i>Internet Access</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M0 11c2.761.575 6.312 1.688 9 3.438 3.157-4.23 8.828-8.187 15-11.438-5.861 5.775-10.711 12.328-14 18.917-2.651-3.766-5.547.271-10.917z" />
+                    </svg>
+                </button> -->
+
+                <img class="slf2" src="slf logo.png" alt="logo">
+                <h3 class="title">Students Laboratory Foyer</h3>
+                <p>Your attendance has been successfully recorded.!<br>
+                    Keep the tab open until the lab is finished.<br>
+                    Each person may only use one computer at a time.
+                    <br> Never exit the page without logging out.
+                </p>
+                <!-- Add hidden fields for login and logout times -->
+                <input type="hidden" name="login_time" id="login_time" value="">
+                <input type="hidden" name="logout_time" id="logout_time" value="">
+
+                <button type="button" class="logout-btn" onclick="logout()">LOGOUT</button>
+            </div>
+
+        </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // Object to keep track of logged-in users for each lab
+        var loggedInUsers = {
+            "Research Lab": {},
+            "OS Lab": {},
+            "Network Lab": {}
+        };
+
+        var formSubmitted = false; // Flag to track whether form data has been submitted
+
+        // Listen for beforeunload event to log out user when the window is closed
+        window.addEventListener('beforeunload', function (e) {
+            if (!formSubmitted) {
+                logout();
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+
+    function login() {
+    var name = document.getElementsByName("name")[0].value;
+    var registerNumber = document.getElementsByName("Register Number")[0].value;
+    var systemNumber = localStorage.getItem('ls_systemNumber');
+    var lab = document.getElementsByName("Lab")[0].value;
+
+    // Validate register number to be exactly 11 digits
+    if (registerNumber.length !== 11) {
+        alert("Enter the valid Register Number");
+        return;
+    }
+
+    // Check if 'Choose Lab' is selected
+    if (lab === "Choose Lab") {
+        alert("Please select a lab.");
+        return;
+    }
+
+    // Rest of the login logic
+    if (name && registerNumber && systemNumber) {
+        // Check if the register number is already logged in for the same lab
+        if (loggedInUsers[lab] && loggedInUsers[lab][registerNumber]) {
+            alert("User with Register Number " + registerNumber + " is already logged in for " + lab);
+            return;
+        }
+
+        // Proceed with login actions
+        window.open("http://192.168.2.250:8090/httpclient.html", "_blank");
+        document.getElementById("login_time").value = getCurrentTime();
+
+        // Update the loggedInUsers object
+        if (!loggedInUsers[lab]) {
+            loggedInUsers[lab] = {};
+        }
+        loggedInUsers[lab][registerNumber] = getCurrentTime();
+
+        // Toggle visibility of login and logout sections
+        $("#login-section").hide();
+        $("#logout-section").show();
+    } else {
+        alert("Please fill out all the details to login.");
+    }
+}
+
+        function logout() {
+            // Set logout time before form submission
+            document.getElementById("logout_time").value = getCurrentTime();
+            document.getElementById("loader").style.display = "block";
+
+            $.ajax({
+                url: "https://script.google.com/macros/s/AKfycbxfMtYGaVbidKwekn1qTaCkXTkMljkVZrr6zwLOjTw3h9AlWuvvKMJMfyWoV4hfyUsM/exec",
+                data: $("#submit-form").serialize(),
+                method: "post",
+                success: function (response) {
+                    alert("Form submitted successfully");
+                    formSubmitted = true; // Set flag to true after successful submission
+                    window.location.href = "index1.html";
+                },
+                error: function (err) {
+                    document.getElementById("loader").style.display = "none";
+                    alert("Something Error");
+                }
+            });
+
+            var lab = document.getElementsByName("Lab")[0].value;
+            var registerNumber = document.getElementsByName("Register Number")[0].value;
+            delete loggedInUsers[lab][registerNumber];
+        }
+
+        // Helper function to get current time in HH:mm:ss format
+        function getCurrentTime() {
+            const now = new Date();
+            return now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+        }
+
+        function Internet() {
+            window.open("http://192.168.2.250:8090/httpclient.html", "_blank");
+        }
+
+        // Load options from localStorage
+function loadLabOptions() {
+    var select = document.getElementById("select-design");
+    var storedOptions = JSON.parse(localStorage.getItem('labOptions')) || [];
+
+    console.log("Loaded options from localStorage:", storedOptions);
+
+    // Clear all options
+    select.innerHTML = '';
+
+    // Add default 'Choose Lab' option
+    var defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "Choose Lab";
+    select.appendChild(defaultOption);
+
+    // Add stored options
+    storedOptions.forEach(function(optionText) {
+        var newOption = document.createElement("option");
+        newOption.value = optionText;
+        newOption.textContent = optionText;
+        select.appendChild(newOption);
+    });
+}
+function addLabOption(newOption) {
+    var labOptions = JSON.parse(localStorage.getItem('labOptions')) || [];
+
+    // Check if the new option already exists
+    if (!labOptions.includes(newOption)) {
+        labOptions.push(newOption);
+        localStorage.setItem('labOptions', JSON.stringify(labOptions));
+    }
+}
+
+// Example: Add a new lab option
+addLabOption('New Lab');
+
+
+// Call this function when the page loads
+window.onload = function() {
+    loadLabOptions();
+};
+    </script>
+</body>
+
+</html>

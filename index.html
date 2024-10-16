@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students Laboratory Foyer</title>
+    <link rel="icon" href="fxec logo.png" type="images/x-icon">
+    <style>
+       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+*, html, body {
+    margin: 0;
+    padding: 0;
+        }
+ body {
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container {
+    height: 400px;
+    width: 350px;
+    box-shadow: 0 0 17px 10px rgb(0 0 0 / 30%);
+    border-radius: 20px;
+    background: white;
+    overflow: hidden;
+    margin-top: 70px;
+}
+#st{
+    height: 40px;
+    width: 180px;
+    border: none;
+    background-color: #5a82c7;
+    color: white;
+    border-radius: 6px;
+    transition: 0.2s;
+    letter-spacing: 3px;
+    margin-left:90px;
+    margin-top: 170px;
+}
+.ad{
+    height: 40px;
+    width: 180px;
+    border: none;
+    background-color: #5a82c7;
+    color: white;
+    border-radius: 6px;
+    transition: 0.2s;
+    letter-spacing: 3px;
+    margin-left:90px ;
+    margin-top: 50px;
+}
+#st:hover{
+    box-shadow: 0 0 0 2px #fff,0 0 0 4px #5a82c7;
+    letter-spacing:4px;
+    width: 173px;
+}
+.ad:hover{
+    box-shadow: 0 0 0 2px #fff,0 0 0 4px #5a82c7;
+    letter-spacing:4px;
+    width: 173px;
+}
+.logo{
+    height: 80px;
+    width: 340px;
+    margin-top:30px;
+    margin-left: 0px;
+    position:absolute;
+    display:inline;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img class="logo" src="fx.png" alt="logo">
+      <a href="Student.html"><button id="st">STUDENT LOGIN</button></a>
+       <a href="admin.html"><button class="ad">ADMIN LOGIN</button></a>
+    </div>
+</body>
+</html>

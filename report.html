@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date and Time Search</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    #select-design{
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    input[type="date"], input[type="time"] {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Admin Report Generation</h2>
+    <div class="form-group">
+        <label for="toTime">Select Lab</label>
+        <select id="select-design" name="Lab">
+            <option>Choose Lab</option>
+            <option value="Research Lab">Research Lab</option>
+            <option value="OS Lab">OS Lab</option>
+            <option value="Network Lab">Network Lab</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="fromDate">From Date:</label>
+        <input type="date" id="fromDate" name="fromDate">
+    </div>
+    <div class="form-group">
+        <label for="toDate">To Date:</label>
+        <input type="date" id="toDate" name="toDate">
+    </div>
+    <div class="form-group">
+        <label for="fromTime">From Time:</label>
+        <input type="time" id="fromTime" name="fromTime">
+    </div>
+    <div class="form-group">
+        <label for="toTime">To Time:</label>
+        <input type="time" id="toTime" name="toTime">
+    </div>
+    <button type="submit">Search</button>
+    
+    <button id="logoutButton">Logout</button>
+</div>
+<script>
+    // JavaScript code for handling the logout button click event
+    document.getElementById('logoutButton').addEventListener('click', function() {
+      // Redirect to the admin.html page
+      window.location.href = "admin.html";
+    });
+  </script>
+</body>
+</html>

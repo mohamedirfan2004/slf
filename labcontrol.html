@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Select Options</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        select,
+        button {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Manage Lab Options</h2>
+    <div class="text-input">
+        <select id="lab-select" name="Lab">
+            <option>Choose Lab</option>
+            <option value="Research Lab">Research Lab</option>
+            <option value="OS Lab">OS Lab</option>
+            <option value="Network Lab">Network Lab</option>
+        </select>
+    </div>
+
+    <div>
+        <input type="text" id="newOption" placeholder="New Option Name">
+        <button type="button" onclick="addOption()">Add Option</button>
+        <button type="button" onclick="removeOption()">Remove Option</button>
+    </div>
+
+    <script>
+        // Load existing options from localStorage
+        function loadOptions() {
+            var select = document.getElementById("lab-select");
+            var storedOptions = JSON.parse(localStorage.getItem('labOptions')) || [];
+
+            // Clear all options except the default one
+            select.innerHTML = '<option>Choose Lab</option>';
+
+            // Add stored options
+            storedOptions.forEach(function(optionText) {
+                var newOption = document.createElement("option");
+                newOption.value = optionText;
+                newOption.textContent = optionText;
+                select.appendChild(newOption);
+            });
+        }
+
+        function saveOptions() {
+            var select = document.getElementById("lab-select");
+            var optionsArray = Array.from(select.options).map(option => option.value);
+            localStorage.setItem('labOptions', JSON.stringify(optionsArray.slice(1))); // Exclude "Choose Lab"
+        }
+
+        function addOption() {
+            var select = document.getElementById("lab-select");
+            var newOptionText = document.getElementById("newOption").value.trim();
+
+            if (newOptionText) {
+                var newOption = document.createElement("option");
+                newOption.value = newOptionText;
+                newOption.textContent = newOptionText;
+                select.appendChild(newOption);
+                document.getElementById("newOption").value = ""; // Clear input
+                saveOptions();
+            } else {
+                alert("Please enter a name for the new option.");
+            }
+        }
+
+        function removeOption() {
+            var select = document.getElementById("lab-select");
+            var selectedIndex = select.selectedIndex;
+
+            if (selectedIndex > 0) { // Ensure not removing the default option
+                select.remove(selectedIndex);
+                saveOptions();
+            } else {
+                alert("Please select an option to remove.");
+            }
+        }
+
+        // Load options on page load
+        window.onload = loadOptions;
+    </script>
+</body>
+
+</html>

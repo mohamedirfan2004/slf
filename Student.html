@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Login Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="myform">
+      <form onsubmit="saveSystemNumber(event)">
+        <h2>SYSTEM LOGIN</h2>
+        <input type="text" id="systemNumber" autocomplete="off" placeholder="Enter System Number">
+        <button type="submit">SUBMIT</button>
+      </form>
+    </div>
+    <div class="image">
+     <img src="fx.png" alt="logo">
+    </div>
+  </div>
+
+  <script>
+    //alert("Please enter the correct system number,once enter the number don't change it.");
+    window.onload = function() {
+      var systemNumber = localStorage.getItem('ls_systemNumber');
+      if (systemNumber) {
+        window.location.href = "index1.html"; // Redirect to student login page
+      }
+    };
+
+    function saveSystemNumber(event) {
+      event.preventDefault();
+      var systemNumber = document.getElementById("systemNumber").value;
+      localStorage.setItem('ls_systemNumber', systemNumber);
+      window.location.href = "index1.html"; // Redirect to student login page
+    }
+  </script>
+</body>
+</html>
