@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sheets Data</title>
+</head>
+<body>
+    <h1>Google Sheets Data</h1>
+    <div id="sheetData"></div>
+
+    <script>
+        // Function to load Google Sheets API
+        function loadSheetsApi() {
+            gapi.client.load('sheets', 'v4', fetchData);
+        }
+
+        // Function to fetch data from Google Sheet
+        function fetchData() {
+            gapi.client.sheets.spreadsheets.values.get({
+                spreadsheetId: '1_mT6VdnuXXyszRN7Y0uGgryxYGmTIWI5gCwt_gJcbvE',
+                range: 'Sheet1!A1:C10' // Specify the range from which you want to fetch data
+            }).then(function(response) {
+                var values = response.result.values;
+                if (values) {
+                    var sheetData = document.getElementById('sheetData');
+                    sheetData.innerHTML = '<h2>Data from Google Sheet:</h2>';
+                    for (var row = 0; row < values.length; row++) {
+                        var rowDiv = document.createElement('div');
+                        rowDiv.textContent = values[row].join(', ');
+                        sheetData.appendChild(rowDiv);
+                    }
+                } else {
+                    console.log('No data found.');
+                }
+            }, function(response) {
+                console.log('Error: ' + response.result.error.message);
+            });
+        }
+    </script>
+    
+    <!-- Load the Google API client library -->
+    <script src="https://apis.google.com/js/api.js" onload="loadSheetsApi()"></script>
+</body>
+</html>

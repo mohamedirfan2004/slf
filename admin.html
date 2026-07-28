@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login Panel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <div class="container">
+    <div class="myform">
+      <form onsubmit="validateForm(); return false;">
+        <h2>ADMIN LOGIN</h2>
+        <input type="text" id="adminName" autocomplete="off" placeholder="Enter Admin Name">
+        <input type="password" id="adminPassword" autocomplete="off" placeholder="Enter Admin Password">
+        <button type="submit">LOGIN</button>
+      </form>
+    </div>
+    <div class="image">
+      <img src="fx.png">
+    </div>
+  </div>
+<script>
+function validateForm() {
+  var adminName = document.getElementById('adminName').value;
+  var adminPassword = document.getElementById('adminPassword').value;
+
+  // Check if adminName is "123" and adminPassword is "123"
+  if (adminName === 'slf' && adminPassword === 'slf@123') {
+    window.location.href = "https://script.google.com/macros/s/AKfycbxfMtYGaVbidKwekn1qTaCkXTkMljkVZrr6zwLOjTw3h9AlWuvvKMJMfyWoV4hfyUsM/exec"; // Redirect to report.html
+  } else {
+    alert('Invalid admin name or password!');
+  }
+}
+</script>
+</body>
+</html>
