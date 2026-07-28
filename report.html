@@ -3,49 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Date and Time Search</title>
+<title>Date and Time Search | Admin Report</title>
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
     body {
-        font-family: Arial, sans-serif;
+        font-family: 'Poppins', Arial, sans-serif;
+        background-color: #f4f6f9;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 15px;
     }
 
     .container {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
+        width: 100%;
+        max-width: 480px;
+        background: #ffffff;
+        padding: 30px 25px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+        color: #1c1c1e;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 1.4rem;
     }
 
     .form-group {
-        margin-bottom: 20px;
+        margin-bottom: 18px;
     }
 
     label {
         display: block;
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-    #select-design{
-        width: 100%;
-        padding: 8px;
-        box-sizing: border-box;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #333;
+        font-size: 0.9rem;
     }
 
-    input[type="date"], input[type="time"] {
+    #select-design, input[type="date"], input[type="time"] {
         width: 100%;
-        padding: 8px;
+        padding: 10px 12px;
         box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s;
+    }
+
+    #select-design:focus, input[type="date"]:focus, input[type="time"]:focus {
+        border-color: #007bff;
+    }
+
+    .btn-group {
+        display: flex;
+        gap: 12px;
+        margin-top: 25px;
     }
 
     button {
-        padding: 10px 20px;
+        flex: 1;
+        padding: 12px;
         background-color: #007bff;
         color: #fff;
         border: none;
+        border-radius: 8px;
         cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+        transition: background-color 0.2s;
     }
 
     button:hover {
         background-color: #0056b3;
+    }
+
+    #logoutButton {
+        background-color: #dc3545;
+    }
+
+    #logoutButton:hover {
+        background-color: #bd2130;
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            padding: 24px 18px;
+        }
+        .btn-group {
+            flex-direction: column;
+        }
     }
 </style>
 </head>
@@ -78,9 +136,11 @@
         <label for="toTime">To Time:</label>
         <input type="time" id="toTime" name="toTime">
     </div>
-    <button type="submit">Search</button>
     
-    <button id="logoutButton">Logout</button>
+    <div class="btn-group">
+        <button type="submit">Search</button>
+        <button type="button" id="logoutButton">Logout</button>
+    </div>
 </div>
 <script>
     // JavaScript code for handling the logout button click event
@@ -88,6 +148,6 @@
       // Redirect to the admin.html page
       window.location.href = "admin.html";
     });
-  </script>
+</script>
 </body>
 </html>

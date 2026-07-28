@@ -3,94 +3,129 @@
 *, html, body {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background-image: url(bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    padding: 20px 10px;
 }
-.logo{
-    height: 100px;
-    width: 360px;
-    margin-top: 170px;
-    position:absolute;
-    display:inline;
+
+.logo {
+    max-width: 85%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
-#demo{
-    margin-top: -50px;
-    margin-left: 900px;
-    position: absolute;
-    height: 40px;
-    width: 150px;
+
+#demo {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1000;
+    height: 38px;
+    padding: 0 14px;
     border: none;
     background-color: #5a82c7;
-    color: black;
-    border-radius: 6px;
-    transition: 0.2s;
-    letter-spacing: 3px;
+    color: white;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-#demo:hover{
-    box-shadow: 0 0 0 2px #fff,0 0 0 4px #5a82c7;
-    letter-spacing:4px;
-    width: 153px;
+
+#demo a {
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+}
+
+#demo:hover {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #5a82c7;
+    background-color: #4a72b7;
 }
    
 .container {
-    width: 50vw;
-    height: 60vh;
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-areas: "login";
-    box-shadow: 0 0 17px 10px rgb(0 0 0 / 30%);
+    width: 92%;
+    max-width: 440px;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
     background: white;
     overflow: hidden;
-    margin-top: 70px;
+    margin: 40px auto 20px auto;
+    position: relative;
 }
 
-.slf{
-    height:150px;
-    width: 150px;
-    position: absolute;
-    margin-top: -370px;
+.slf, .slf2 {
+    height: 90px;
+    width: auto;
+    max-width: 130px;
+    position: relative;
+    margin-bottom: 10px;
+    margin-top: 0;
+    object-fit: contain;
 }
+
 .design {
-    grid-area: design;
     display: none;
     position: relative;
-    background-color: #e6e6e6;
+    background-color: #f4f6f9;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
 }
-.rotate-45 {
-    transform: rotate(-45deg);
-}
-.login {
-    grid-area: login;
+
+.login, .logout {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
     background: white;
+    width: 100%;
+    height: 100%;
+    padding: 30px 20px;
+    box-sizing: border-box;
 }
-.login h3.title {
-    margin: 15px 0;
+
+.login h3.title, .logout h3.title {
+    margin: 10px 0 15px 0;
+    font-size: 1.15rem;
+    color: #333;
+    text-align: center;
 }
+
 .text-input {
     background: #e6e6e6;
-    height: 40px;
+    height: 44px;
     display: flex;
-    width: 60%;
+    width: 90%;
+    max-width: 320px;
     align-items: center;
     border-radius: 10px;
     padding: 0 15px;
-    margin: 5px 0;
+    margin: 8px 0;
+    box-sizing: border-box;
 }
+
 .text-input input {
     background: none;
     border: none;
@@ -98,45 +133,115 @@ body {
     width: 100%;
     height: 100%;
     margin-left: 10px;
+    font-size: 14px;
+    color: #333;
 }
+
 .text-input i {
     color: #686868;
+    font-size: 18px;
 }
-#select-design{
+
+#select-design {
     background: #e6e6e6;
-    height: 40px;
+    height: 44px;
     display: flex;
     width: 90%;
+    max-width: 320px;
     align-items: center;
     border-radius: 10px;
     padding: 0 15px;
-    margin: 5px 0;
+    margin: 8px 0;
     border: none;
-}
-#selec-design{
-    background: none;
-    border: none;
+    font-size: 14px;
+    color: #333;
     outline: none;
-    width: 100%;
-    height: 100%;
-    margin-left: 10px;
+    box-sizing: border-box;
 }
+
 ::placeholder {
     color: #9a9a9a;
 }
-.login-btn {
-    width: 68%;
-    padding: 10px;
+
+.login-btn, .logout-btn {
+    width: 90%;
+    max-width: 320px;
+    padding: 12px;
     color: white;
-    background-color: #5a82c7;
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 15px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: background-color 0.2s ease;
 }
-.login-btn:hover{
-    background-color:blue ;
+
+.login-btn {
+    background-color: #5a82c7;
 }
+
+.login-btn:hover {
+    background-color: #3b66b0;
+}
+
+.logout-btn {
+    background-color: #c75a5a;
+}
+
+.logout-btn:hover {
+    background-color: #b03b3b;
+}
+
+.logout p {
+    margin: 10px 15px;
+    text-align: center;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: #555;
+}
+
+.Network {
+    width: 90%;
+    max-width: 280px;
+    height: 46px;
+    background: #5a82c7;
+    border: none;
+    position: relative;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto 15px auto;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.Network span {
+    position: relative;
+    margin: 0;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.Network svg {
+    position: relative;
+    margin: 0;
+    fill: white;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+}
+
+.Network:hover {
+    background-color: #3b66b0;
+}
+
 a {
     font-size: 12px;
     color: white;
@@ -149,12 +254,10 @@ a.forgot {
     margin-top: 15px;
 }
 
-
 .create {
     display: flex;
     align-items: center;
-    position: absolute;
-    bottom: 30px;
+    margin-top: 15px;
 }
 
 .create i {
@@ -162,115 +265,29 @@ a.forgot {
     margin-left: 10px;
 }
 
-
-.slf2{
-    height:150px;
-    width: 150px;
-    position: absolute;
-    margin-top: -350px;
-}
-.logout {
-    grid-area: login;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content:center;
-    position: relative;
-    background-color: white;
-}
-.logout p{
-    margin:10px;
-}
-.logout h3.title {
-    margin: 15px 0;
-}
-.logout-btn {
-    width: 68%;
-    padding: 10px;
-    color: white;
-    background-color: #c75a5a;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-.logout-btn:hover{
-    background-color:red ;
-}
-.Network{
-    width: 180px;   
-    height: 60px;
-    background: none;
-    border-top: 3px solid #1a2d9c;
-    border-bottom: 3px solid #1a2d9c;
-    border-left: 3px solid #1a2d9c;
-    border-right: 3px solid #1a2d9c;
-    position: absolute;
-    border-radius: 50px;
-    align-items: center;
-    margin-left: -700px;
-    margin-top: 200px;
-    justify-content: center;
-    cursor: pointer;
-    transition: 500ms;
-}
-span{
-    margin-top: -10px;
-    margin-left: -80px;
-}
-svg{
-    margin-left: -10px;
-    margin-top: -10px;
-}
-span, svg{
-    position:fixed;
-    color: black;
-    fill: transparent;
-    font-size: 20px;
-    font-weight: 400;
-}
-.Network:focus{
-    outline: none;
-    border: 2px solid transparent;
-    width: 60px;
-    border-left: 5px solid #5a82c7;
-    border-bottom:5px solid #5a82c7 ;
-    animation: spins 2s 500ms forwards;
-}
-.Network:focus span{
-    color: transparent;
-}
-.Network:focus svg{
-    animation: check 500ms 2300ms forwards;
-}
-.Network:hover{
-    background-color: #7697d0;
-}
-
-@keyframes spins{
-    80%{
-        border: 2px solid transparent;
-        border-left: 5px solid #5a82c7;
-    }
-    100%{
-        transform: rotate(1080deg);
-        border: 5px solid #5a82c7;
-    }
-}
-@keyframes check{
-    to{
-        fill: #5a82c7;
-    }
-}
-
-
+/* Tablet & Desktop Layout */
 @media (min-width: 768px) {
     .container {
-        grid-template-columns: 50% 50%;
+        width: 780px;
+        max-width: 90vw;
+        height: 500px;
+        display: grid;
+        grid-template-columns: 45% 55%;
         grid-template-areas: "design login";
+        margin-top: 40px;
     }
 
     .design {
-        display: block;
+        grid-area: design;
+        display: flex;
+    }
+
+    .login, .logout {
+        grid-area: login;
+    }
+
+    #demo {
+        top: 20px;
+        right: 30px;
     }
 }
